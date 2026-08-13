@@ -35,14 +35,14 @@ Note that the envelope format requires **SHA-1** in OAEP/MGF1, and the PKCS7 pad
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
-      │◄── do_host_auth_ek(HCW)│                           │
-      │──── HRW, EK_token ────►│── do_device_login() ─────►│
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
+      │◄── do_host_auth_ek(HCW) │                           │
+      │──── HRW, EK_token ────► │── do_device_login() ─────►│
       │                         │── EKpriorityhostauth ────►│
-      │                         │   (TID, HCW, HRW)        │
-      │                         │◄── AUTH_OK, EK_cloud ────│
-      │                         │── compare EK match       │
+      │                         │   (TID, HCW, HRW)         │
+      │                         │◄── AUTH_OK, EK_cloud ──── │
+      │                         │── compare EK match        │
       │                         │                           │
 ```
 
@@ -55,16 +55,16 @@ Note that the envelope format requires **SHA-1** in OAEP/MGF1, and the PKCS7 pad
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │                         │── generate RSA-2048      │
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
-      │◄── do_host_auth_ek(HCW)│                           │
-      │──── HRW, EK_token ────►│── do_device_login() ─────►│
+      │                         │── generate RSA-2048       │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
+      │◄── do_host_auth_ek(HCW) │                           │
+      │──── HRW, EK_token ────► │── do_device_login() ─────►│
       │                         │── EKpriorityhostauth_rsa ►│
-      │                         │   (TID,HCW,HRW,pubkey)   │
-      │                         │◄── AUTH_OK, encrypted_EK │
-      │                         │── RSA decrypt → EK       │
-      │                         │── compare EK match       │
+      │                         │   (TID,HCW,HRW,pubkey)    │
+      │                         │◄── AUTH_OK, encrypted_EK  │
+      │                         │── RSA decrypt → EK        │
+      │                         │── compare EK match        │
       │                         │                           │
 ```
 
@@ -79,16 +79,16 @@ The strongest and quickest variant: one round-trip, key never readable in transi
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
-      │◄── do_host_auth_ek(HCW)│                           │
-      │──── HRW, EK_token ────►│── do_device_login() ─────►│
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
+      │◄── do_host_auth_ek(HCW) │                           │
+      │──── HRW, EK_token ────► │── do_device_login() ─────►│
       │                         │── hostauthEK_request ────►│
-      │                         │   (TID, HCW, HRW)        │
-      │                         │◄── transactionid ────────│
+      │                         │   (TID, HCW, HRW)         │
+      │                         │◄── transactionid ──────── │
       │                         │── hostauthEK_checkstatus ►│
-      │                         │◄── AUTH_OK, EK_cloud ────│
-      │                         │── compare EK match       │
+      │                         │◄── AUTH_OK, EK_cloud ──── │
+      │                         │── compare EK match        │
       │                         │                           │
 ```
 
@@ -101,20 +101,20 @@ The strongest and quickest variant: one round-trip, key never readable in transi
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │                         │── generate RSA-2048      │
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
-      │◄── do_host_auth_ek(HCW)│                           │
-      │──── HRW, EK_token ────►│── do_device_login() ─────►│
-      │                         │◄── accesstoken ──────────│
+      │                         │── generate RSA-2048       │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
+      │◄── do_host_auth_ek(HCW) │                           │
+      │──── HRW, EK_token ────► │── do_device_login() ─────►│
+      │                         │◄── accesstoken ────────── │
       │                         │── hostauthEK_request_rsa ►│
-      │                         │   (TID,HCW,HRW,pubkey)   │
-      │                         │◄── transactionid ────────│
-      │                         │── hostauthEK_checkstatus │
-      │                         │   _rsa ─────────────────►│
-      │                         │◄── AUTH_OK, encrypted_EK │
-      │                         │── RSA decrypt → EK       │
-      │                         │── compare EK match       │
+      │                         │   (TID,HCW,HRW,pubkey)    │
+      │                         │◄── transactionid ──────── │
+      │                         │── hostauthEK_checkstatus  │
+      │                         │   _rsa ─────────────────► │
+      │                         │◄── AUTH_OK, encrypted_EK  │
+      │                         │── RSA decrypt → EK        │
+      │                         │── compare EK match        │
       │                         │                           │
 ```
 
@@ -127,16 +127,16 @@ The strongest and quickest variant: one round-trip, key never readable in transi
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│── do_device_login() ─────►│
-      │──── TID ───────────────►│◄── accesstoken ──────────│
+      │◄── get_tid() ────────── │── do_device_login() ─────►│
+      │──── TID ───────────────►│◄── accesstoken ────────── │
       │                         │── tokenauthEK_requestcw ─►│
-      │                         │◄── CW, transactionid ────│
-      │◄── do_token_auth_ek(CW)│                           │
+      │                         │◄── CW, transactionid ──── │
+      │◄── do_token_auth_ek(CW) │                           │
       │──── RW, EK_token ──────►│── tokenauthEK_replyrw ───►│
       │                         │── tokenauthEK_checkstatus►│
-      │                         │◄── AUTH_OK, EK_cloud ────│
-      │                         │── compare EK_token ==    │
-      │                         │   EK_cloud               │
+      │                         │◄── AUTH_OK, EK_cloud ──── │
+      │                         │── compare EK_token ==     │ 
+      │                         │   EK_cloud                │
       │                         │                           │
 ```
 
@@ -148,22 +148,22 @@ The strongest and quickest variant: one round-trip, key never readable in transi
 ┌───────────┐              ┌──────────┐              ┌───────────────┐
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
-└─────┬─────┘              └────┬─────┘              └──────┬────────┘
+└─────┬─────┘              └────┬─────┘              └─────┬────────┘
       │                         │── generate RSA-2048      │
       │                         │   keypair (local)        │
-      │◄── get_tid() ──────────│── do_device_login() ─────►│
+      │◄── get_tid() ────────── │── do_device_login() ─────│
       │──── TID ───────────────►│◄── accesstoken ──────────│
       │                         │── tokenauthEK_requestcw  │
-      │                         │   _rsa(pubkey) ──────────►│
+      │                         │   _rsa(pubkey) ──────────│
       │                         │◄── CW, transactionid ────│
-      │◄── do_token_auth_ek(CW)│                           │
-      │──── RW, EK_token ──────►│── tokenauthEK_replyrw ───►│
+      │◄── do_token_auth_ek(CW) │                          │
+      │──── RW, EK_token ──────►│── tokenauthEK_replyrw ───│
       │                         │── tokenauthEK_checkstatus│
       │                         │   _rsa ─────────────────►│
       │                         │◄── AUTH_OK, encrypted_EK │
       │                         │── RSA decrypt → EK_cloud │
       │                         │── compare EK match       │
-      │                         │                           │
+      │                         │                          │
 ```
 
 ⚠️ This file carries a preserved defect - a dead first decryption pass in `decrypt_hybrid_ek()`. Harmless (the result is discarded and recomputed correctly), but do not copy it forward. See [known-issues](../../docs/known-issues.md).

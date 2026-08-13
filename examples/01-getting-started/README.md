@@ -24,9 +24,9 @@ Reads the 32-byte TID that identifies this token. Every other flow begins by rea
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
       │                         │                           │
-      │◄── get_tid() ──────────│                           │
+      │◄── get_tid() ────────── │                           │
       │──── TID ───────────────►│                           │
-      │                         │── print(TID)             │
+      │                         │── print(TID)              │
       │                         │                           │
 ```
 
@@ -44,17 +44,17 @@ Runs the token's own self-test. With `--full`, it also re-derives the TID, RW an
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
       │                         │                           │
-      │◄── get_tid() ──────────│                           │
+      │◄── get_tid() ────────── │                           │
       │──── TID ───────────────►│                           │
-      │◄── do_bist() ──────────│                           │
-      │──── pass, PCC, ID,     │                           │
-      │     RW, EK ────────────►│── check TID == PCC||ID   │
-      │◄── do_token_auth(TID) ─│                           │
-      │──── RW_verify ─────────►│── check RW match         │
-      │◄── do_host_auth_ek(    │                           │
-      │    ~TID) ──────────────│                           │
-      │──── HRW, EK_verify ───►│── check EK match         │
-      │                         │── print results          │
+      │◄── do_bist() ────────── │                           │
+      │──── pass, PCC, ID,      │                           │
+      │     RW, EK ────────────►│── check TID == PCC||ID    │
+      │◄── do_token_auth(TID) ─ │                           │
+      │──── RW_verify ─────────►│── check RW match          │
+      │◄── do_host_auth_ek(     │                           │
+      │    ~TID) ────────────── │                           │
+      │──── HRW, EK_verify ───► │── check EK match          │
+      │                         │── print results           │
       │                         │                           │
 ```
 
@@ -76,21 +76,21 @@ A token straight from the factory is genuine but unowned: authenticating it retu
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│── do_device_login() ─────►│
-      │──── TID ───────────────►│◄── accesstoken ──────────│
+      │◄── get_tid() ────────── │── do_device_login() ─────►│
+      │──── TID ───────────────►│◄── accesstoken ────────── │
       │                         │                           │
-      │  [Token Auth 3-step]    │── requestcw → replyrw ──►│
-      │◄── do_token_auth(CW) ──│── checkstatus ───────────►│
-      │──── RW ────────────────►│◄── CLAIM_TOKEN, claimid ─│
+      │  [Token Auth 3-step]    │── requestcw → replyrw ──► │
+      │◄── do_token_auth(CW) ── │── checkstatus ───────────►│
+      │──── RW ────────────────►│◄── CLAIM_TOKEN, claimid ─ │
       │                         │                           │
       │                         │── do_tenant_login() ─────►│
-      │                         │◄── tenant accesstoken ───│
+      │                         │◄── tenant accesstoken ─── │
       │                         │── do_tenant_claimtoken ──►│
-      │                         │◄── claim OK ─────────────│
+      │                         │◄── claim OK ───────────── │
       │                         │                           │
-      │  [Token Auth verify]    │── requestcw → replyrw ──►│
-      │◄── do_token_auth(CW) ──│── checkstatus ───────────►│
-      │──── RW ────────────────►│◄── AUTH_OK ──────────────│
+      │  [Token Auth verify]    │── requestcw → replyrw ──► │
+      │◄── do_token_auth(CW) ── │── checkstatus ───────────►│
+      │──── RW ────────────────►│◄── AUTH_OK ────────────── │
       │                         │                           │
 ```
 

@@ -34,14 +34,14 @@ The device generates its own challenge, has the token sign it, and submits both.
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
-      │◄── do_host_auth(HCW) ──│                           │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
+      │◄── do_host_auth(HCW) ── │                           │
       │──── HRW ───────────────►│── do_device_login() ─────►│
-      │                         │◄── accesstoken ──────────│
+      │                         │◄── accesstoken ────────── │
       │                         │── priorityhostauth ──────►│
-      │                         │   (TID, HCW, HRW)        │
-      │                         │◄── AUTH_OK (immediate) ──│
+      │                         │   (TID, HCW, HRW)         │
+      │                         │◄── AUTH_OK (immediate) ── │
       │                         │                           │
 ```
 
@@ -58,16 +58,16 @@ Identical proof, but submission and verdict are separate calls. Use when the dev
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
       │                         │── do_device_login() ─────►│
-      │                         │◄── accesstoken ──────────│
-      │◄── do_host_auth(HCW) ──│                           │
+      │                         │◄── accesstoken ────────── │
+      │◄── do_host_auth(HCW) ── │                           │
       │──── HRW ───────────────►│── hostauth_request ──────►│
-      │                         │   (TID, HCW, HRW)        │
-      │                         │◄── transactionid ────────│
+      │                         │   (TID, HCW, HRW)         │
+      │                         │◄── transactionid ──────── │
       │                         │── hostauth_checkstatus ──►│
-      │                         │◄── AUTH_OK ──────────────│
+      │                         │◄── AUTH_OK ────────────── │
       │                         │                           │
 ```
 
@@ -84,12 +84,12 @@ The cloud supplies the challenge. Use when verification is driven server-side - 
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
+      │◄── get_tid() ────────── │                           │
       │──── TID ───────────────►│── do_device_login() ─────►│
-      │                         │◄── accesstoken ──────────│
+      │                         │◄── accesstoken ────────── │
       │                         │── tokenauth_requestcw ───►│
-      │                         │◄── CW, transactionid ────│
-      │◄── do_token_auth(CW) ──│                           │
+      │                         │◄── CW, transactionid ──── │
+      │◄── do_token_auth(CW) ── │                           │
       │──── RW ────────────────►│── tokenauth_replyrw ─────►│
       │                         │── tokenauth_checkstatus ─►│
       │                         │◄── AUTH_OK / CLAIM_TOKEN ─│
@@ -109,14 +109,14 @@ Authenticates, then separately asks the cloud to derive the HRW for the *same* c
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
       │                         │── do_device_login() ─────►│
-      │                         │◄── accesstoken ──────────│
-      │◄── do_host_auth(HCW) ──│                           │
+      │                         │◄── accesstoken ────────── │
+      │◄── do_host_auth(HCW) ── │                           │
       │──── HRW ───────────────►│── hostauth_request ──────►│
       │                         │── hostauth_checkstatus ──►│
-      │                         │◄── AUTH_OK ──────────────│
+      │                         │◄── AUTH_OK ────────────── │
       │                         │── requestHRW(TID, HCW) ──►│
       │                         │── requestHRWstatus ──────►│
       │                         │◄── HRW_cloud ──────────── │
@@ -138,16 +138,16 @@ Plain authentication proves the device to the cloud. This also proves the cloud 
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│── do_device_login() ─────►│
-      │──── TID ───────────────►│◄── accesstoken ──────────│
+      │◄── get_tid() ────────── │── do_device_login() ─────►│
+      │──── TID ───────────────►│◄── accesstoken ─────────  │
       │                         │── mutualauth_requestcw ──►│
-      │                         │◄── CW, transactionid ────│
-      │◄── do_token_auth(CW) ──│                           │
+      │                         │◄── CW, transactionid ──── │
+      │◄── do_token_auth(CW) ── │                           │
       │──── RW ────────────────►│── mutualauth_replyrw ────►│
       │                         │── mutualauth_checkstatus ►│
-      │                         │◄── AUTH_OK, HRW2_cloud ──│
-      │◄── do_host_auth(RW||RW)│                           │
-      │──── HRW2_local ────────►│── compare HRW2 match     │
+      │                         │◄── AUTH_OK, HRW2_cloud ── │
+      │◄── do_host_auth(RW||RW) │                           │
+      │──── HRW2_local ────────►│── compare HRW2 match      │
       │                         │                           │
 ```
 
@@ -164,16 +164,16 @@ Same two-way guarantee, but the device supplies the challenge and drives the exc
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── make_challenge() → HCW │
-      │◄── do_host_auth(HCW) ──│                           │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── make_challenge() → HCW  │
+      │◄── do_host_auth(HCW) ── │                           │
       │──── HRW ───────────────►│── do_device_login() ─────►│
       │                         │── hostmutualauth_request ►│
-      │                         │   (TID, HCW, HRW)        │
+      │                         │   (TID, HCW, HRW)         │
       │                         │── hostmutualauth_check ──►│
-      │                         │◄── AUTH_OK, HRW2_cloud ──│
-      │◄── do_host_auth(HRW||HRW)                         │
-      │──── HRW2_local ────────►│── compare HRW2 match     │
+      │                         │◄── AUTH_OK, HRW2_cloud ── │
+      │◄── do_host_auth(HRW||HRW)                           │
+      │──── HRW2_local ────────►│── compare HRW2 match      │
       │                         │                           │
 ```
 

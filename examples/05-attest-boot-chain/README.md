@@ -35,20 +35,20 @@ The device picks its own `BootCW`, walks the chain locally, and submits the star
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── compute FW hashes      │
-      │                         │── make_challenge()→BootCW│
-      │                         │   CW1 = BootCW XOR FW2   │
-      │◄── do_host_auth(CW1) ──│                           │
-      │──── RW1 ───────────────►│   chain = RW1||RW1       │
-      │                         │   CW2 = chain XOR FW3    │
-      │◄── do_host_auth(CW2) ──│                           │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── compute FW hashes       │
+      │                         │── make_challenge()→BootCW │
+      │                         │   CW1 = BootCW XOR FW2    │
+      │◄── do_host_auth(CW1) ── │                           │
+      │──── RW1 ───────────────►│   chain = RW1||RW1        │
+      │                         │   CW2 = chain XOR FW3     │
+      │◄── do_host_auth(CW2) ── │                           │
       │──── attestation_value ─►│── do_device_login() ─────►│
       │                         │── requestHostSecureBoot ─►│
-      │                         │   (TIDs, hashes,         │
-      │                         │    BootCW, attestation)  │
+      │                         │   (TIDs, hashes,          │
+      │                         │    BootCW, attestation)   │
       │                         │── checkHostSecureBoot ───►│
-      │                         │◄── AUTH_OK ──────────────│
+      │                         │◄── AUTH_OK ────────────── │
       │                         │                           │
 ```
 
@@ -65,20 +65,20 @@ The cloud supplies the starting challenge, so it controls when attestation happe
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│                           │
-      │──── TID ───────────────►│── compute FW hashes      │
+      │◄── get_tid() ────────── │                           │
+      │──── TID ───────────────►│── compute FW hashes       │
       │                         │── do_device_login() ─────►│
       │                         │── requestSecureBootCW ───►│
-      │                         │   (TIDs, FW hashes)      │
-      │                         │◄── CW, transactionid ────│
-      │                         │   CW1 = CW XOR FW2hash  │
-      │◄── do_host_auth(CW1) ──│                           │
-      │──── RW1 ───────────────►│   chain = RW1||RW1       │
-      │                         │   CW2 = chain XOR FW3hash│
-      │◄── do_host_auth(CW2) ──│                           │
+      │                         │   (TIDs, FW hashes)       │
+      │                         │◄── CW, transactionid ──── │
+      │                         │   CW1 = CW XOR FW2hash    │
+      │◄── do_host_auth(CW1) ── │                           │
+      │──── RW1 ───────────────►│   chain = RW1||RW1        │
+      │                         │   CW2 = chain XOR FW3hash │
+      │◄── do_host_auth(CW2) ── │                           │
       │──── attestation_value ─►│── replySecureBootRW ─────►│
       │                         │── checkSecureBootStatus ─►│
-      │                         │◄── AUTH_OK ──────────────│
+      │                         │◄── AUTH_OK ────────────── │
       │                         │                           │
 ```
 
