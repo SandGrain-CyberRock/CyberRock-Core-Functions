@@ -57,7 +57,7 @@ def main():
     #    │ alongside your data as the hardware-anchored signature.       │
     #    └───────────────────────────────────────────────────────────────┘
     if hrw_token == hrw_cloud:
-        print("\nHRW values match — cloud authenticated")
+        print("\nHRW values match - cloud authenticated")
     else:
         print("\nHRW mismatch!")
 

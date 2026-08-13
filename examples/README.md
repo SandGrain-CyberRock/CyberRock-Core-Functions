@@ -2,7 +2,7 @@
 
 Every example here is **self-contained**. Pick the one closest to what you need, copy it into your project, and replace the block marked `YOUR INTEGRATION POINT`. Nothing else is required beyond the four core modules.
 
-Filenames are unchanged from previous releases — only the folders are new.
+Filenames are unchanged from previous releases - only the folders are new.
 
 ---
 
@@ -33,22 +33,22 @@ Folders say *what you are trying to achieve*. Filenames follow the SDK's origina
 <flow>_<variant>.py
 ```
 
-**Flow** — who issues the challenge, and what is being proven:
+**Flow** - who issues the challenge, and what is being proven:
 
 | Flow | Meaning |
 | --- | --- |
 | `token_auth` | The **cloud** issues the challenge (CW → RW). Verification is driven server-side. |
 | `host_auth` | The **device** issues the challenge (HCW → HRW). The device decides when to prove itself. |
-| `mutual_auth` | Both sides prove themselves — the cloud returns an HRW2 the device can reproduce. |
+| `mutual_auth` | Both sides prove themselves - the cloud returns an HRW2 the device can reproduce. |
 | `hrwrequest` | Ask the cloud to derive the HRW for data you supply. |
 | `secureboot` | Attest a chain of firmware hashes. |
 | `daisychain` | Bind several data items to one verification. |
 
-**Variant** — one or more suffixes, always in this order:
+**Variant** - one or more suffixes, always in this order:
 
 | Suffix | Meaning |
 | --- | --- |
-| `_ek` | Also derives an Ephemeral Key — a session key both sides compute but never transmit. |
+| `_ek` | Also derives an Ephemeral Key - a session key both sides compute but never transmit. |
 | `_priority` | Synchronous. One call, immediate answer, no polling. Without it the flow polls for a result. |
 | `_rsa2048` | The EK comes back RSA-2048 wrapped, not readable in transit. Requires `cryptography`. |
 | `_host` | The host/device-initiated form of a chain or mutual flow. |
@@ -60,8 +60,8 @@ So `03-derive-session-key/host_auth_ek_priority_rsa2048.py` = device-initiated, 
 
 ## Quickstart
 
-1. **Add your credentials** — fill in `SandGrain_Credentials.py`. See [`../docs/configuration.md`](../docs/configuration.md). Contact <support@sandgrain.eu> if you do not have a tenant account yet.
-2. **Set your interface** — in `CyberRock_Config.py`, choose `'USB'` or `'SPI'` and pick the environment (`sandbox` or `production`).
+1. **Add your credentials** - fill in `SandGrain_Credentials.py`. See [`../docs/configuration.md`](../docs/configuration.md). Contact <support@sandgrain.eu> if you do not have a tenant account yet.
+2. **Set your interface** - in `CyberRock_Config.py`, choose `'USB'` or `'SPI'` and pick the environment (`sandbox` or `production`).
 3. **Confirm the token responds:**
 
    ```bash
@@ -75,7 +75,7 @@ So `03-derive-session-key/host_auth_ek_priority_rsa2048.py` = device-initiated, 
    python examples/02-prove-device-identity/host_auth_priority.py
    ```
 
-   You should see `AUTH_OK`. If you see `CLAIM_TOKEN`, run `01-getting-started/token_claim.py` first — the token is genuine but not yet bound to your tenant.
+   You should see `AUTH_OK`. If you see `CLAIM_TOKEN`, run `01-getting-started/token_claim.py` first - the token is genuine but not yet bound to your tenant.
 
 Requirements: Python 3.9+, `requests`, `pyserial`. The `_rsa2048` examples additionally need `cryptography`.
 
@@ -83,9 +83,9 @@ Requirements: Python 3.9+, `requests`, `pyserial`. The `_rsa2048` examples addit
 
 ## Also here
 
-- **A README in every folder** — what those scripts are for, a table for choosing between the variants, and a sequence diagram per script showing the Token ↔ Host ↔ Cloud exchange. Open the folder's README before opening the code.
-- [`../docs/configuration.md`](../docs/configuration.md) — hardware wiring, interface selection, credentials.
-- [`../docs/known-issues.md`](../docs/known-issues.md) — **read before copying** `06-chain-multiple-items/daisychain_host.py` or `05-attest-boot-chain/secureboot_hrw.py`.
+- **A README in every folder** - what those scripts are for, a table for choosing between the variants, and a sequence diagram per script showing the Token ↔ Host ↔ Cloud exchange. Open the folder's README before opening the code.
+- [`../docs/configuration.md`](../docs/configuration.md) - hardware wiring, interface selection, credentials.
+- [`../docs/known-issues.md`](../docs/known-issues.md) - **read before copying** `06-chain-multiple-items/daisychain_host.py` or `05-attest-boot-chain/secureboot_hrw.py`.
 
 ---
 

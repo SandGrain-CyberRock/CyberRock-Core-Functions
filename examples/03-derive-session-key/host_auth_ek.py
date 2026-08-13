@@ -62,7 +62,7 @@ def main():
     #    │ `ek_cloud`. A mismatch means the two sides disagree.          │
     #    └───────────────────────────────────────────────────────────────┘
     if ek_token == ek_cloud:
-        print("\nEphemeral keys match — shared session key established")
+        print("\nEphemeral keys match - shared session key established")
     else:
         print("\nEphemeral key mismatch!")
 

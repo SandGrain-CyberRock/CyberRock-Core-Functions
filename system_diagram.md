@@ -1,4 +1,4 @@
-# SandGrain CyberRock Python SDK — System Diagram
+# SandGrain CyberRock Python SDK - System Diagram
 
 ## 1. Architecture Overview
 
@@ -287,9 +287,9 @@ value with the next firmware hash first. One token call per boot stage.
 
 Per-script sequence diagrams live alongside the code, in each folder's README:
 
-- [`examples/01-getting-started/README.md`](examples/01-getting-started/README.md) — 3 scripts
-- [`examples/02-prove-device-identity/README.md`](examples/02-prove-device-identity/README.md) — 6 scripts
-- [`examples/03-derive-session-key/README.md`](examples/03-derive-session-key/README.md) — 6 scripts
-- [`examples/04-sign-and-verify-data/README.md`](examples/04-sign-and-verify-data/README.md) — 6 scripts
-- [`examples/05-attest-boot-chain/README.md`](examples/05-attest-boot-chain/README.md) — 3 scripts
-- [`examples/06-chain-multiple-items/README.md`](examples/06-chain-multiple-items/README.md) — 3 scripts
+- [`examples/01-getting-started/README.md`](examples/01-getting-started/README.md) - 3 scripts
+- [`examples/02-prove-device-identity/README.md`](examples/02-prove-device-identity/README.md) - 6 scripts
+- [`examples/03-derive-session-key/README.md`](examples/03-derive-session-key/README.md) - 6 scripts
+- [`examples/04-sign-and-verify-data/README.md`](examples/04-sign-and-verify-data/README.md) - 6 scripts
+- [`examples/05-attest-boot-chain/README.md`](examples/05-attest-boot-chain/README.md) - 3 scripts
+- [`examples/06-chain-multiple-items/README.md`](examples/06-chain-multiple-items/README.md) - 3 scripts

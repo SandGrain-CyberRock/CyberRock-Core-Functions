@@ -60,14 +60,14 @@ def main():
 
     # Step 3: Check if token needs claiming
     if authenticationresult == 'AUTH_OK':
-        print("Token is already claimed — no action needed")
+        print("Token is already claimed - no action needed")
         return
 
     if authenticationresult != 'CLAIM_TOKEN':
         print(f"Authentication failed with status: {authenticationresult}")
         return
 
-    # Step 4: Token needs claiming — log in as tenant
+    # Step 4: Token needs claiming - log in as tenant
     print(f"\nClaim Token ID: {claimid}")
     print("Logging in as tenant...")
 

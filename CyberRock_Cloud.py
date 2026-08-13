@@ -16,9 +16,9 @@ range of authentication and key-wrapping flows supported by the platform:
 	- Tenant login and token claiming
 
 Each async flow follows a three-step pattern:
-	1. Request  — submit inputs, receive a transactionId
-	2. Reply    — submit the token response (where applicable)
-	3. Status   — poll until the cloud returns a terminal status
+	1. Request  - submit inputs, receive a transactionId
+	2. Reply    - submit the token response (where applicable)
+	3. Status   - poll until the cloud returns a terminal status
 
 EK variants additionally return an Enclave Key (EK) from the HSM-backed
 CyberRock-Enclave, for flows that require HSM-side key derivation.

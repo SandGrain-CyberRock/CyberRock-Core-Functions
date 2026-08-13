@@ -75,7 +75,7 @@ def main():
     #    │ at provisioning time and compare against it later.            │
     #    └───────────────────────────────────────────────────────────────┘
     if hrw_local == hrw_cloud:
-        print("\nDaisy Chain HRW verified — chain is authentic")
+        print("\nDaisy Chain HRW verified - chain is authentic")
     else:
         print("\nDaisy Chain HRW mismatch!")
 

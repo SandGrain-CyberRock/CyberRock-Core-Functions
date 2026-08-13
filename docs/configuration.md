@@ -27,7 +27,7 @@ These credentials are issued once SandGrain has created your Tenant user account
 
 ### Protecting your credentials
 
-`SandGrain_Credentials.py` ships as a template that you edit **in place** — and it is **not** covered by `.gitignore`. If you vendor this project into your own repository, add it before you fill anything in:
+`SandGrain_Credentials.py` ships as a template that you edit **in place** - and it is **not** covered by `.gitignore`. If you vendor this project into your own repository, add it before you fill anything in:
 
 ```bash
 echo 'SandGrain_Credentials.py' >> .gitignore
@@ -58,7 +58,7 @@ import CyberRock_Config as config
 print(config.list_serial_ports())
 ```
 
-### SPI wiring — Raspberry Pi 4 to token (SGT1001)
+### SPI wiring - Raspberry Pi 4 to token (SGT1001)
 
 | Raspberry Pi pin | Token pin |
 | --- | --- |
@@ -82,13 +82,16 @@ sudo raspi-config      # Interface Options -> SPI -> Enable
 Also in `CyberRock_Config.py`:
 
 ```python
-ENVIRONMENT = 'sandbox'      # or 'production'
+ENVIRONMENT = 'sandbox'      # or 'uat', 'production'
 ```
 
 | Environment | Device API |
 | --- | --- |
 | `sandbox` | `https://device-api.sandbox.sandgrain.io/` |
+| `uat` | `https://device-api-uat.sandgrain.dev/` |
 | `production` | `https://device-api.cyberrock.sandgrain.io/` |
+
+Make sure the environment matches where your credentials were issued - a credential pair from one environment is rejected by the others with `NOT_FOUND.INCORRECT_LOGIN_CREDENTIALS`.
 
 The tenant API URL is derived automatically by substituting `tenant-api` for `device-api`.
 

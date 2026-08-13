@@ -47,7 +47,7 @@ def main():
     transactionid = cloud.do_device_hostmutualauth_request(
         credentials.cloudflaretokens, iotaccesstoken, tid, hcw, hrw, False)
 
-    # Step 2: Poll for result — cloud returns auth status + its own proof, HRW2
+    # Step 2: Poll for result - cloud returns auth status + its own proof, HRW2
     authenticationresult, hrw2_cloud, claimid = cloud.do_device_hostmutualauth_checkstatus(
         credentials.cloudflaretokens, iotaccesstoken, transactionid, False, False)
 
@@ -69,7 +69,7 @@ def main():
         if authenticationresult not in ('AUTH_OK', 'CLAIM_TOKEN'):
             print(f"  Cloud rejected host auth: {authenticationresult}")
         if hrw2_cloud != hrw2_local:
-            print(f"  HRW2 mismatch — cloud not authenticated")
+            print(f"  HRW2 mismatch - cloud not authenticated")
 
 
 if __name__ == "__main__":

@@ -1,8 +1,8 @@
-# 06 — Chain Multiple Items
+# 06 - Chain Multiple Items
 
 **Cover a whole batch with a single verification.**
 
-When you have a set of values that must be proven together *and in order* — a batch of sensor readings, a sequence of log records, a manifest — chaining folds them into one value. One verification then replaces N, and altering, reordering or dropping any item changes the result.
+When you have a set of values that must be proven together *and in order* - a batch of sensor readings, a sequence of log records, a manifest - chaining folds them into one value. One verification then replaces N, and altering, reordering or dropping any item changes the result.
 
 **The chain:**
 
@@ -22,13 +22,13 @@ Data items are 32-hex-character (16-byte) values. Hash anything larger down firs
 | [`daisychain_host.py`](daisychain_host.py) ⚠️ | Device | Verify a batch, device-driven | 3 cloud calls, 3 transfers |
 | [`daisychain_hrw.py`](daisychain_hrw.py) | Device | Ask the cloud for the *expected* value | 3 cloud calls, 6 transfers |
 
-⭐ **Start with `daisychain.py`** — it has a correct chain loop and is the clearest illustration of the pattern.
+⭐ **Start with `daisychain.py`** - it has a correct chain loop and is the clearest illustration of the pattern.
 
-> ⚠️ **`daisychain_host.py` carries two preserved defects** — a hardcoded challenge that overrides the generated one, and a chain loop that does not advance. It is correct only because its `l_data` has exactly one item; **with two or more the submitted value is wrong**. Read [known-issues](../../docs/known-issues.md) before copying it, and take the loop from `daisychain.py` or `daisychain_hrw.py` instead.
+> ⚠️ **`daisychain_host.py` carries two preserved defects** - a hardcoded challenge that overrides the generated one, and a chain loop that does not advance. It is correct only because its `l_data` has exactly one item; **with two or more the submitted value is wrong**. Read [known-issues](../../docs/known-issues.md) before copying it, and take the loop from `daisychain.py` or `daisychain_hrw.py` instead.
 
 ---
 
-## `daisychain.py` — Cloud-Initiated ⭐
+## `daisychain.py` - Cloud-Initiated ⭐
 
 ```text
 ┌───────────┐              ┌──────────┐              ┌───────────────┐
@@ -50,11 +50,11 @@ Data items are 32-hex-character (16-byte) values. Hash anything larger down firs
       │                         │                           │
 ```
 
-Three TIDs, two data items. The loop reassigns the running `hrw` each pass — this is the correct pattern.
+Three TIDs, two data items. The loop reassigns the running `hrw` each pass - this is the correct pattern.
 
 ---
 
-## `daisychain_host.py` — Device-Initiated ⚠️
+## `daisychain_host.py` - Device-Initiated ⚠️
 
 Same idea, but the device supplies the `ChainCW`, so the chain can be built offline and submitted later.
 
@@ -77,11 +77,11 @@ Same idea, but the device supplies the `ChainCW`, so the chain can be built offl
       │                         │                           │
 ```
 
-Two TIDs, one data item — which is why the broken loop happens to produce the right answer here. See the warning above.
+Two TIDs, one data item - which is why the broken loop happens to produce the right answer here. See the warning above.
 
 ---
 
-## `daisychain_hrw.py` — Expected Value
+## `daisychain_hrw.py` - Expected Value
 
 Instead of submitting a value for a yes/no verdict, this asks the cloud to derive the expected final `HRW` for a chain. Use it to record a known-good reference at provisioning time, or to locate which link of a failing chain diverged.
 
@@ -105,7 +105,7 @@ Instead of submitting a value for a yes/no verdict, this asks the cloud to deriv
       │                         │                           │
 ```
 
-Five TIDs, four data items. No RW submission needed — the cloud derives its answer independently. This file also has a **correct** advancing loop worth copying.
+Five TIDs, four data items. No RW submission needed - the cloud derives its answer independently. This file also has a **correct** advancing loop worth copying.
 
 ---
 

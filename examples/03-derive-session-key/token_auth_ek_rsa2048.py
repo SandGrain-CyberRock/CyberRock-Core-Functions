@@ -116,7 +116,7 @@ def main():
     #    │ the hardware-derived `ek_token`.                              │
     #    └───────────────────────────────────────────────────────────────┘
     if ek_token == ek_decrypted:
-        print("\n[OK] Ephemeral Keys match — RSA-encrypted delivery successful")
+        print("\n[OK] Ephemeral Keys match - RSA-encrypted delivery successful")
     else:
         print("\n[!] Ephemeral Key mismatch!")
 

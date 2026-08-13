@@ -23,12 +23,14 @@ interface = 'USB'
 serial_port = None
 
 # --- Environment Configuration ---
-# Set to one of: 'sandbox', 'production'
-ENVIRONMENT = 'sandbox'
+# Set to one of: 'sandbox', 'uat', 'production'
+ENVIRONMENT = 'uat'
+#ENVIRONMENT = 'sandbox'
 #ENVIRONMENT = 'production'
 
 ENVIRONMENT_URLS = {
     'sandbox':    'https://device-api.sandbox.sandgrain.io/',
+    'uat':        'https://device-api-uat.sandgrain.dev/',
     'production': 'https://device-api.cyberrock.sandgrain.io/',
 }
 

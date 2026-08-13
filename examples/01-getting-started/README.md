@@ -1,4 +1,4 @@
-# 01 — Getting Started
+# 01 - Getting Started
 
 **Is the token alive, healthy, and mine?**
 
@@ -14,7 +14,7 @@ Run these three in order on a new setup. The first two need no credentials and n
 
 ---
 
-## `token_id.py` — Token Identification
+## `token_id.py` - Token Identification
 
 Reads the 32-byte TID that identifies this token. Every other flow begins by reading it, and every cloud call is scoped to it.
 
@@ -34,9 +34,9 @@ No cloud interaction.
 
 ---
 
-## `bist.py` — Built-In Self-Test
+## `bist.py` - Built-In Self-Test
 
-Runs the token's own self-test. With `--full`, it also re-derives the TID, RW and EK through the normal command path and checks them against what BIST reported — so a disagreement points at the hardware rather than at your integration.
+Runs the token's own self-test. With `--full`, it also re-derives the TID, RW and EK through the normal command path and checks them against what BIST reported - so a disagreement points at the hardware rather than at your integration.
 
 ```text
 ┌───────────┐              ┌──────────┐              ┌───────────────┐
@@ -58,7 +58,7 @@ Runs the token's own self-test. With `--full`, it also re-derives the TID, RW an
       │                         │                           │
 ```
 
-No cloud interaction — all verification is local. Exits non-zero on failure, so you can gate a provisioning step on it.
+No cloud interaction - all verification is local. Exits non-zero on failure, so you can gate a provisioning step on it.
 
 ```bash
 python examples/01-getting-started/bist.py          # basic pass/fail
@@ -67,7 +67,7 @@ python examples/01-getting-started/bist.py --full   # + TID/RW/EK consistency
 
 ---
 
-## `token_claim.py` — Token Claiming
+## `token_claim.py` - Token Claiming
 
 A token straight from the factory is genuine but unowned: authenticating it returns `CLAIM_TOKEN` rather than `AUTH_OK`. Claiming binds it to your tenant. Run once per token.
 
@@ -100,5 +100,5 @@ If the first authentication already returns `AUTH_OK`, the token is claimed and 
 
 ---
 
-**Next:** [`../02-prove-device-identity/`](../02-prove-device-identity/) — prove the device is genuine.
+**Next:** [`../02-prove-device-identity/`](../02-prove-device-identity/) - prove the device is genuine.
 [Back to all examples](../README.md) · [Configuration](../../docs/configuration.md)

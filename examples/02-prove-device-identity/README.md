@@ -1,8 +1,8 @@
-# 02 — Prove Device Identity
+# 02 - Prove Device Identity
 
 **Is this device genuine?**
 
-The core question the SDK exists to answer. A challenge is issued, only the real token can compute the response, and the cloud verifies it against its HSM. Because the secret never leaves the hardware, this proves *possession of the token* — not knowledge of a key that could have been copied.
+The core question the SDK exists to answer. A challenge is issued, only the real token can compute the response, and the cloud verifies it against its HSM. Because the secret never leaves the hardware, this proves *possession of the token* - not knowledge of a key that could have been copied.
 
 | Script | Challenge from | Result | Cost |
 | --- | --- | --- | --- |
@@ -13,7 +13,7 @@ The core question the SDK exists to answer. A challenge is issued, only the real
 | [`mutual_auth.py`](mutual_auth.py) | Cloud | Polled, **cloud proves itself too** | 4 cloud calls |
 | [`mutual_auth_host.py`](mutual_auth_host.py) | Device | Polled, **cloud proves itself too** | 3 cloud calls |
 
-⭐ **Start with `host_auth_priority.py`** — shortest complete round-trip, and the pattern most integrations build on.
+⭐ **Start with `host_auth_priority.py`** - shortest complete round-trip, and the pattern most integrations build on.
 
 **Choosing:**
 
@@ -21,11 +21,11 @@ The core question the SDK exists to answer. A challenge is issued, only the real
 - *Can you wait?* No → `_priority`. Yes → the polling variant.
 - *Do you trust the endpoint?* No → `mutual_auth*`, which also proves the cloud is genuine.
 
-All flows also need the token to be **claimed** first — an unclaimed token returns `CLAIM_TOKEN`. See [`../01-getting-started/token_claim.py`](../01-getting-started/token_claim.py).
+All flows also need the token to be **claimed** first - an unclaimed token returns `CLAIM_TOKEN`. See [`../01-getting-started/token_claim.py`](../01-getting-started/token_claim.py).
 
 ---
 
-## `host_auth_priority.py` — Device-Initiated, Synchronous ⭐
+## `host_auth_priority.py` - Device-Initiated, Synchronous ⭐
 
 The device generates its own challenge, has the token sign it, and submits both. The verdict comes back in the same call.
 
@@ -49,7 +49,7 @@ No polling. One request, one answer.
 
 ---
 
-## `host_auth.py` — Device-Initiated, Asynchronous
+## `host_auth.py` - Device-Initiated, Asynchronous
 
 Identical proof, but submission and verdict are separate calls. Use when the device may go offline between the two, or when the caller should not block.
 
@@ -71,13 +71,13 @@ Identical proof, but submission and verdict are separate calls. Use when the dev
       │                         │                           │
 ```
 
-`checkstatus` polls until a terminal status. **It has no timeout** — see [known-issues](../../docs/known-issues.md).
+`checkstatus` polls until a terminal status. **It has no timeout** - see [known-issues](../../docs/known-issues.md).
 
 ---
 
-## `token_auth.py` — Cloud-Initiated
+## `token_auth.py` - Cloud-Initiated
 
-The cloud supplies the challenge. Use when verification is driven server-side — a scheduled re-attestation, an admin-triggered check — rather than by the device.
+The cloud supplies the challenge. Use when verification is driven server-side - a scheduled re-attestation, an admin-triggered check - rather than by the device.
 
 ```text
 ┌───────────┐              ┌──────────┐              ┌───────────────┐
@@ -100,7 +100,7 @@ Three steps rather than two: the challenge has to be fetched before the token ca
 
 ---
 
-## `host_auth_hrwrequest.py` — Device-Initiated + Cloud Cross-Check
+## `host_auth_hrwrequest.py` - Device-Initiated + Cloud Cross-Check
 
 Authenticates, then separately asks the cloud to derive the HRW for the *same* challenge. Useful during bring-up: comparing the two answers tells you whether a failure is in the token, the challenge handling, or the verification.
 
@@ -119,16 +119,17 @@ Authenticates, then separately asks the cloud to derive the HRW for the *same* c
       │                         │◄── AUTH_OK ──────────────│
       │                         │── requestHRW(TID, HCW) ──►│
       │                         │── requestHRWstatus ──────►│
-      │                         │◄── HRW_cloud ────────────│
-      │                         │── compare HRW == HRW_cloud│
+      │                         │◄── HRW_cloud ──────────── │
+      │                         │── print both HRWs         │
+      │                         │(compare HRW == HRW_cloud) │
       │                         │                           │
 ```
 
-A diagnostic, not a production pattern — it doubles the cloud traffic for information you only need while integrating.
+A diagnostic, not a production pattern - it doubles the cloud traffic for information you only need while integrating.
 
 ---
 
-## `mutual_auth.py` — Mutual, Cloud-Initiated
+## `mutual_auth.py` - Mutual, Cloud-Initiated
 
 Plain authentication proves the device to the cloud. This also proves the cloud to the device: after accepting the token's RW, the cloud returns `HRW2`, which the device can reproduce locally. Only a party holding the same secret can produce it, so an impostor server is caught.
 
@@ -150,11 +151,11 @@ Plain authentication proves the device to the cloud. This also proves the cloud 
       │                         │                           │
 ```
 
-**Both** conditions must hold. A good auth result with a mismatched `HRW2` means you are talking to an impostor — treat it as a failure.
+**Both** conditions must hold. A good auth result with a mismatched `HRW2` means you are talking to an impostor - treat it as a failure.
 
 ---
 
-## `mutual_auth_host.py` — Mutual, Device-Initiated
+## `mutual_auth_host.py` - Mutual, Device-Initiated
 
 Same two-way guarantee, but the device supplies the challenge and drives the exchange. Here `HRW2` is derived from `HRW || HRW` rather than `RW || RW`.
 
@@ -180,5 +181,5 @@ Preferred over `mutual_auth.py` when the device is the active party.
 
 ---
 
-**Next:** [`../03-derive-session-key/`](../03-derive-session-key/) — same flows, but they also hand you a session key.
+**Next:** [`../03-derive-session-key/`](../03-derive-session-key/) - same flows, but they also hand you a session key.
 [Back to all examples](../README.md) · [Configuration](../../docs/configuration.md) · [Known issues](../../docs/known-issues.md)

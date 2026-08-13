@@ -104,7 +104,7 @@ def main():
     #    │ BOTH must match before you trust either value.                │
     #    └───────────────────────────────────────────────────────────────┘
     if hrw_token == hrw_cloud and ek_token == ek_decrypted:
-        print("\n[OK] HRW and EK match — RSA-encrypted delivery successful")
+        print("\n[OK] HRW and EK match - RSA-encrypted delivery successful")
     else:
         print("\n[!] Mismatch!")
 

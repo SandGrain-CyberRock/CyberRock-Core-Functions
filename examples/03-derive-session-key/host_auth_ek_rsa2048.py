@@ -2,7 +2,7 @@
 Derive a shared session key (EK) -- device issues the challenge, EK arrives encrypted.
 
 WHEN TO USE   Device-driven key establishment where HTTPS alone is not
-              enough -- a terminating proxy, a TLS-inspection middlebox, or
+              enough - a terminating proxy, a TLS-inspection middlebox, or
               a compliance rule that forbids key material being readable at
               any hop.
 YOU NEED      A connected token, IoT device credentials, network access,
@@ -111,7 +111,7 @@ def main():
     #    │ the hardware-derived `ek_token`.                              │
     #    └───────────────────────────────────────────────────────────────┘
     if ek_token == ek_decrypted:
-        print("\n[OK] Ephemeral Keys match — RSA-encrypted delivery successful")
+        print("\n[OK] Ephemeral Keys match - RSA-encrypted delivery successful")
     else:
         print("\n[!] Ephemeral Key mismatch!")
 

@@ -108,7 +108,7 @@ def main():
     #    │ Record it at provisioning time and compare against it later.  │
     #    └───────────────────────────────────────────────────────────────┘
     if attestation_local == attestation_cloud:
-        print("\nSecure Boot Attestation HRW verified — attestation value correct")
+        print("\nSecure Boot Attestation HRW verified - attestation value correct")
     else:
         print("\nSecure Boot Attestation HRW mismatch!")
 

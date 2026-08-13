@@ -1,5 +1,5 @@
 """
-CyberRock_Token.py — Hardware abstraction layer for the SandGrain CyberRock security token.
+CyberRock_Token.py - Hardware abstraction layer for the SandGrain CyberRock security token.
 
 Supports SPI (Raspberry Pi via spidev/RPi.GPIO) and USB serial interfaces.
 USB serial works cross-platform (Linux and Windows).
@@ -138,7 +138,7 @@ def init(interface='SPI', spi_bus=0, spi_device=0, spi_speed=10_000_000,
 
 def _transfer_l(l):
     if _do_transfer_l is None:
-        raise RuntimeError("CyberRock_Token not initialized — call init() first")
+        raise RuntimeError("CyberRock_Token not initialized - call init() first")
     return _do_transfer_l(l)
 
 def list_invert(l): return [(~e)&0xFF for e in l]
