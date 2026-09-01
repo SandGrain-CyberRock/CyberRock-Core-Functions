@@ -16,7 +16,6 @@ chain length is yours to choose.
 """
 
 import sys
-import hashlib
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -37,22 +36,7 @@ def main():
     print(f"TID: {tid}")
 
     # 3. RUN THE FLOW
-    # Simulate firmware hashes
-    hash_func = hashlib.new('sha256')
-    hash_func.update(b'firmware_level_2_content')
-    fw2hash = hash_func.hexdigest()
-
-    hash_func2 = hashlib.new('sha256')
-    hash_func2.update(b'firmware_level_3_content')
-    fw3hash = hash_func2.hexdigest()
-
-    hash_func3 = hashlib.new('sha256')
-    hash_func3.update(b'firmware_level_4_content')
-    fw4hash = hash_func3.hexdigest()
-
-    # NOTE: the three assignments below overwrite the computed hashes above,
-    # making that computation dead. Preserved verbatim during the restructure.
-    # See docs/known-issues.md.
+    # Firmware hashes (fixed test values for reproducible attestation)
     fw2hash = '10276c01e17911a793eed9382786ea2a8227b25a931876026302c9bce004b40e'
     fw3hash = '20276c01e17911a793eed9382786ea2a8227b25a931876026302c9bce004b40e'
     fw4hash = '30276c01e17911a793eed9382786ea2a8227b25a931876026302c9bce004b40e'

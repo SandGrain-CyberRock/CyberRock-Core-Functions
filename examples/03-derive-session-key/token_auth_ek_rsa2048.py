@@ -60,13 +60,8 @@ def decrypt_hybrid_ek(private_key, encrypted_ek_json_str):
         mgf=asym_padding.MGF1(algorithm=hashes.SHA1()),
         algorithm=hashes.SHA1(), label=None))
 
-    # NOTE: the next two lines are a dead first pass -- they build two separate
-    # decryptor objects and the result is discarded and recomputed below.
-    # Preserved verbatim during the restructure. See docs/known-issues.md.
     cipher = Cipher(algorithms.AES(aes_key), modes.CBC(iv))
-    padded = cipher.decryptor().update(cipher_text) + cipher.decryptor().finalize()
-    # Re-do decryption in one pass
-    decryptor = Cipher(algorithms.AES(aes_key), modes.CBC(iv)).decryptor()
+    decryptor = cipher.decryptor()
     padded = decryptor.update(cipher_text) + decryptor.finalize()
     return padded[:-padded[-1]].decode('utf-8')
 

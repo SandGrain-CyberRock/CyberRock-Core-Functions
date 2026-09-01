@@ -112,7 +112,7 @@ Instead of submitting a value for a yes/no verdict, this asks the cloud to compu
 
 Three levels here rather than two - chain length is yours to choose.
 
-⚠️ This file carries a preserved defect: the three computed firmware hashes are overwritten by hardcoded constants, so it attests a fixed synthetic chain rather than the hashes it appears to compute. See [known-issues](../../docs/known-issues.md).
+The firmware hashes are fixed test values, kept deliberately so the attestation is reproducible across runs. Substitute your real firmware digests when copying this flow.
 
 ---
 

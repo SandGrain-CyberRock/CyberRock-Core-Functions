@@ -78,7 +78,7 @@ Before either will work, set your credentials and interface: **[`docs/configurat
 | [`examples/04-sign-and-verify-data/`](examples/04-sign-and-verify-data/) | `hrwrequest.py` · `hrwrequest_priority.py` · `hrwrequest_ek.py` · `hrwrequest_ek_priority.py` · `hrwrequest_ek_rsa2048.py` · `hrwrequest_ek_priority_rsa2048.py` |
 | [`examples/05-attest-boot-chain/`](examples/05-attest-boot-chain/) | `secureboot.py` · `secureboot_host.py` · `secureboot_hrw.py` |
 | [`examples/06-chain-multiple-items/`](examples/06-chain-multiple-items/) | `daisychain.py` · `daisychain_host.py` · `daisychain_hrw.py` |
-| [`docs/`](docs/) | [`configuration.md`](docs/configuration.md) - wiring, interface, credentials, dependencies. [`known-issues.md`](docs/known-issues.md) - preserved defects and production caveats. |
+| [`docs/`](docs/) | [`configuration.md`](docs/configuration.md) - wiring, interface, credentials, dependencies. [`known-issues.md`](docs/known-issues.md) - production caveats and resolved defects. |
 | [`scripts/`](scripts/) | `verify_migration.py` - AST harness used to prove the 2026-08 reorganisation changed no protocol behaviour. Kept for reference; not needed to use the SDK. |
 | [`tests/`](tests/) | `test_token_helpers.py` - verifies `hex_to_bytes()` and `make_challenge()` match the idioms they replaced. Run with `python3 -m unittest discover tests`. |
 
@@ -108,7 +108,7 @@ Python 3.9+, `requests`, `pyserial`. The `_rsa2048` examples additionally need `
 - [`examples/README.md`](examples/README.md) - example index, decision table, filename vocabulary
 - **Each `examples/NN-*/README.md`** - what that folder's scripts are for, how to choose between them, and a sequence diagram per script
 - [`docs/configuration.md`](docs/configuration.md) - wiring, interface, credentials, dependencies
-- [`docs/known-issues.md`](docs/known-issues.md) - preserved defects and production caveats. **Read before copying** `examples/06-chain-multiple-items/daisychain_host.py` or `examples/05-attest-boot-chain/secureboot_hrw.py`.
+- [`docs/known-issues.md`](docs/known-issues.md) - production caveats and the record of resolved defects
 - [`system_diagram.md`](system_diagram.md) - full architecture and protocol overview
 
 ---

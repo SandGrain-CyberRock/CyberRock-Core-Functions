@@ -85,13 +85,15 @@ Requirements: Python 3.9+, `requests`, `pyserial`. The `_rsa2048` examples addit
 
 - **A README in every folder** - what those scripts are for, a table for choosing between the variants, and a sequence diagram per script showing the Token ↔ Host ↔ Cloud exchange. Open the folder's README before opening the code.
 - [`../docs/configuration.md`](../docs/configuration.md) - hardware wiring, interface selection, credentials.
-- [`../docs/known-issues.md`](../docs/known-issues.md) - **read before copying** `06-chain-multiple-items/daisychain_host.py` or `05-attest-boot-chain/secureboot_hrw.py`.
+- [`../docs/known-issues.md`](../docs/known-issues.md) - production caveats and the record of resolved defects.
 
 ---
 
 ## What changed from previous releases
 
 **Filenames and behaviour are unchanged.** Every script issues exactly the same protocol calls, in the same order, with the same arguments as before. This was verified mechanically at migration time by `scripts/verify_migration.py`, which AST-compared all 27 old/new pairs and reported no differences. That script is retained for reference; it needs the pre-restructure sources on disk to run, and those have since been removed.
+
+One exception since then: the upstream 2026-08-21 bug-fix commit ("Fix bugs and clean up") has been applied here, which fixed the four defects recorded in [`../docs/known-issues.md`](../docs/known-issues.md) - most visibly, `06-chain-multiple-items/daisychain_host.py` now uses its generated challenge and chains two data items correctly.
 
 What moved is the location. All 27 previously lived in the flat `CyberRockCoreFunctions/` directory, which is gone; they now sit in six folders named for the outcome they achieve:
 

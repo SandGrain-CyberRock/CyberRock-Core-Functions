@@ -19,12 +19,10 @@ Data items are 32-hex-character (16-byte) values. Hash anything larger down firs
 | Script | ChainCW from | Purpose | Cost |
 | --- | --- | --- | --- |
 | [`daisychain.py`](daisychain.py) ⭐ | Cloud | Verify a batch, server-driven | 4 cloud calls, 4 transfers |
-| [`daisychain_host.py`](daisychain_host.py) ⚠️ | Device | Verify a batch, device-driven | 3 cloud calls, 3 transfers |
+| [`daisychain_host.py`](daisychain_host.py) | Device | Verify a batch, device-driven | 3 cloud calls, 3 transfers |
 | [`daisychain_hrw.py`](daisychain_hrw.py) | Device | Ask the cloud for the *expected* value | 3 cloud calls, 6 transfers |
 
-⭐ **Start with `daisychain.py`** - it has a correct chain loop and is the clearest illustration of the pattern.
-
-> ⚠️ **`daisychain_host.py` carries two preserved defects** - a hardcoded challenge that overrides the generated one, and a chain loop that does not advance. It is correct only because its `l_data` has exactly one item; **with two or more the submitted value is wrong**. Read [known-issues](../../docs/known-issues.md) before copying it, and take the loop from `daisychain.py` or `daisychain_hrw.py` instead.
+⭐ **Start with `daisychain.py`** - it is the clearest illustration of the pattern.
 
 ---
 
@@ -54,7 +52,7 @@ Three TIDs, two data items. The loop reassigns the running `hrw` each pass - thi
 
 ---
 
-## `daisychain_host.py` - Device-Initiated ⚠️
+## `daisychain_host.py` - Device-Initiated
 
 Same idea, but the device supplies the `ChainCW`, so the chain can be built offline and submitted later.
 
@@ -63,12 +61,12 @@ Same idea, but the device supplies the `ChainCW`, so the chain can be built offl
 │   Token   │              │  Script  │              │  CyberRock    │
 │  (HMAC HW)│              │          │              │    Cloud      │
 └─────┬─────┘              └────┬─────┘              └──────┬────────┘
-      │◄── get_tid() ──────────│── ChainCW (hardcoded ⚠️) │
+      │◄── get_tid() ──────────│── make_challenge()→ChainCW│
       │──── TID ───────────────►│── do_device_login() ─────►│
       │                         │◄── accesstoken ──────────│
       │◄── do_host_auth(HCW) ──│                           │
-      │──── HRW ───────────────►│  HCW_n = HRW + data[0]  │
-      │◄── do_host_auth(HCW_n) │                           │
+      │──── HRW ───────────────►│  HCW_n = HRW_n + data[i] │
+      │◄── do_host_auth(HCW_n) │   (once per data item)    │
       │──── HRW_n (final) ─────►│── HostDaisyChainAuth ────►│
       │                         │   (TIDs, data, HCW,      │
       │                         │    HRW_n)                │
@@ -77,7 +75,7 @@ Same idea, but the device supplies the `ChainCW`, so the chain can be built offl
       │                         │                           │
 ```
 
-Two TIDs, one data item - which is why the broken loop happens to produce the right answer here. See the warning above.
+Three TIDs, two data items. As in `daisychain.py`, the loop advances a running value each pass.
 
 ---
 

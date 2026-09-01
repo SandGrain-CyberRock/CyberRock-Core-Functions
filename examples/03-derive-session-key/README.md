@@ -166,8 +166,6 @@ The strongest and quickest variant: one round-trip, key never readable in transi
       │                         │                          │
 ```
 
-⚠️ This file carries a preserved defect - a dead first decryption pass in `decrypt_hybrid_ek()`. Harmless (the result is discarded and recomputed correctly), but do not copy it forward. See [known-issues](../../docs/known-issues.md).
-
 ---
 
 **Next:** [`../04-sign-and-verify-data/`](../04-sign-and-verify-data/) - tag your own data instead of a generated challenge.
